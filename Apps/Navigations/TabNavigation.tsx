@@ -6,6 +6,7 @@ import Add from "../Screens/Add/Add";
 import Profile from "../Screens/Profile/Profile";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import AddScreenNavigation from "./AddScreenNavigation";
 
 const Tab = createBottomTabNavigator();
 export default function TabNavigation() {
@@ -36,7 +37,7 @@ export default function TabNavigation() {
             />
             <Tab.Screen
                 name="Add"
-                component={Add}
+                component={AddScreenNavigation}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="add-circle" size={30} color={color} />
