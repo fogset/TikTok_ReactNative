@@ -5,20 +5,25 @@ import { FlatList } from "react-native";
 import SingleVideo from "./SingleVideo";
 
 export default function Home() {
+    const [loading, setLoading] = useState(false);
     const [videoList, setVideoList] = useState([]);
     useEffect(() => {
         GetLastVideoList();
     }, []);
     async function GetLastVideoList() {
-        const { data, error } = await supabase.from("PostList").select("*").range(0, 9);
+        const { data, error } = await supabase
+            .from("PostList")
+            .select("username,thumbnail")
+            .range(0, 9);
         if (data) {
+            setLoading(false);
             console.log(data);
             setVideoList(data);
         }
     }
     return (
         <Container>
-            <Container2 onPress={GetLastVideoList}>
+            <Container2>
                 <Text1>Home</Text1>
                 <Image
                     source={{
@@ -30,6 +35,9 @@ export default function Home() {
                 {videoList !== null && (
                     <FlatList
                         data={videoList}
+                        onRefresh={GetLastVideoList}
+                        refreshing={loading}
+                        onEndReached={() => console.log("end")}
                         numColumns={2}
                         renderItem={({ item }) => <SingleVideo video={item} />}
                     />
