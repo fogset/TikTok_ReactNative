@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components/native";
 import { supabase } from "../../../Utils/SupabaseConfig";
-import { FlatList } from "react-native";
-import SingleVideo from "./SingleVideo";
+import { FlatList } from "react-native-gesture-handler";
+import SingleVideoThumbnail from "./SingleVideoThumbnail";
 
 export default function Home() {
     const [loading, setLoading] = useState(false);
@@ -39,7 +39,7 @@ export default function Home() {
                         refreshing={loading}
                         onEndReached={() => console.log("end")}
                         numColumns={2}
-                        renderItem={({ item }) => <SingleVideo video={item} />}
+                        renderItem={({ item }) => <SingleVideoThumbnail video={item} />}
                     />
                 )}
             </Container3>
