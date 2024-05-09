@@ -2,8 +2,18 @@ import React, { useState, useRef } from "react";
 import styled from "styled-components/native";
 import { Video, ResizeMode } from "expo-av";
 import { StyleSheet } from "react-native";
+import { supabase } from "./../../../Utils/SupabaseConfig";
 
 export default function Login() {
+    async function googleSignIn() {
+        const { data, error } = await supabase
+            .from("Users")
+            .insert([{ name: "test1", email: "1@2sdf.com" }])
+            .select();
+        if (data) {
+            console.log(data);
+        }
+    }
     return (
         <Container>
             <Video
@@ -20,7 +30,7 @@ export default function Login() {
                     Utlimate Place to Share your Short Videos with Great Community
                 </Description>
             </View>
-            <GoogleSignIn onPress={() => console.log("button clicked")}>
+            <GoogleSignIn onPress={googleSignIn}>
                 <Image
                     source={{
                         uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfhVpPVV8Fs6oaJFnKFV0wuw8m4deMwYX_FbnEwyzSGQ&s",
